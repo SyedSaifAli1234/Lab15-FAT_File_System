@@ -52,7 +52,7 @@ int main(void) {
     	if(c == '1'){
     		printf("Please enter the name of the file: ");
     		scanf("%s", name);
-    		printf("\nThe file name entered by you is %s\n", name);
+    		//printf("\nThe file name entered by you is %s\n", name);
             int n = 0;
     		
             while(name[n]!=NULL){
@@ -61,7 +61,7 @@ int main(void) {
     		
             name[n]='\0'; 
             n=0; 		
-            printf("FileName = %s\n\n", name);
+            //printf("FileName = %s\n\n", name);
 
     		for(int k=4; k < (4+Num_of_files); k++){
     			for (int m = 0; name[m]!='\0'; m++){
@@ -69,44 +69,45 @@ int main(void) {
                         length++;
                     }
                     else{
-                        printf("No match\n");
+                        //printf("No match\n");
                         check = 1;
                         break;
                     }
     			}
                 if(check == 0){
 
-                    printf("\nMatched at Line %d\n", k);
-                    printf("Length = %d\n", length);
+                    //printf("\nMatched at Line %d\n", k);
+                    //printf("Length = %d\n", length);
                     add = (line[k][length+1]);///////////////////////////////////////
-                    printf("Starting address = %c\n", add);
+                    //printf("Starting address = %c\n", add);
 
                     block_add = line[first_block + (add-'0')][0];
                     
                     while(1){
                         if(block_add == '-'){
                             if(line[first_block + (add-'0')][1] == '1'){
-                                printf("No space allocated\n");
+                                //printf("No space allocated\n");
                                 break;
                             }
-                            else(){
-                                printf("The space allocated is 32 bytes\n");
+                            else{
+                                //printf("The space allocated is 32 bytes\n");
                                 break;
                             }
                         }
                         else{
                             blocks++;
                             block_add = line[first_block + (block_add-'0')][0];
-                            printf("Number at block = %c\n", block_add);
+                            //printf("Number at block = %c\n", block_add);
                         }
                     }
-                    printf("The total space allocated for %s is %d\n", name, (blocks*32));
-                   
+                    
+                    printf("\n\n\n=====The total space allocated for %s is %d bytes=====\n\n\n", name, (blocks*32));
+                    blocks = 0;
                     break;
 
                 }
                 else{
-                    printf("Moving to the next line\n");
+                    //printf("Moving to the next line\n");
                     check = 0;
                     length = 0;
                 }
