@@ -24,6 +24,7 @@ int main(void) {
     int length = 0;
     int first_block = 8;
     int blocks;
+    int counter;
 
 		
 
@@ -126,7 +127,22 @@ int main(void) {
 
 
     	else if(c == '3'){
-    		printf("\nThe total free space on disk is: \n");
+            blocks = 0;
+
+            while(counter!=row){
+                if(line[first_block][0] == '-' && line[first_block][1] == NULL){
+                    blocks++;
+                    first_block++;
+                }
+                else{
+                    first_block++;
+                }
+                counter++;
+            }
+            printf("Blocks = %d\n", blocks);
+            printf("The total free space is %d bytes\n", (blocks*32));
+            counter = 0;
+            first_block = 8;
     	}
 
 
