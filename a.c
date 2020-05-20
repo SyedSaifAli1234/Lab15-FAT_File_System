@@ -118,8 +118,59 @@ int main(void) {
 
     	else if(c == '2'){
     		printf("Please enter the name of the file you want to delete: ");
-    		scanf("%s", name);
-    		printf("\nThe file name entered  by you is %s\n", name);
+            scanf("%s", name);
+            int n = 0;
+            
+            while(name[n]!=NULL){
+                n++;
+            }
+            
+            name[n]='\0'; 
+            n=0;
+
+            for(int k=4; k < (4+Num_of_files); k++){
+                for (int m = 0; name[m]!='\0'; m++){
+                    if(line[k][m] == name[m]){
+                        length++;
+                    }
+                    else{
+                        check = 1;
+                        break;
+                    }
+                }
+                if(check == 0){
+
+                    add = (line[k][length+1]);///////////////////////////////////////
+                    
+
+                    block_add = line[first_block + (add-'0')][0];
+                    line[first_block + (add-'0')][0] = '-';
+                    
+                    while(1){
+                        if(block_add == '-'){
+                            if(line[first_block + (add-'0')][1] == '1'){
+                                break;
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                        else{
+                            blocks++;
+                            block_add = line[first_block + (block_add-'0')][0];
+                        }
+                    }
+                    
+                    printf("\n\n\n=====The total space allocated for %s is %d bytes=====\n\n\n", name, (blocks*32));
+                    blocks = 0;
+                    break;
+
+                }
+                else{
+                    check = 0;
+                    length = 0;
+                }
+            }
     	}
 
 
