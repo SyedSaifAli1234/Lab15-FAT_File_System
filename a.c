@@ -6,16 +6,21 @@
 #define col 128 
 #define row 10 
 
-int main(void) 
-{
+int main(void) {
+
     char line[row][col];
 	char fname[20];
+	char name[20];
+	char temp[20];
     FILE *fptr = NULL; 
     int i = 0;
     int tot = 0;
     int j;
-    char name[20];
     char c;
+  	int Num_of_files;
+    int check = 0;
+    int add = 0;
+    int length = 0;
 		
 
     fptr = fopen("file.txt", "r");
@@ -25,11 +30,9 @@ int main(void)
         i++;
     }
     tot = i;
-	// printf("\n The content of the file are\n");    
- //    for(i = 0; i < tot; ++i)
- //    {
- //        printf(" %s\n", line[i]);
- //    }
+	
+    Num_of_files = *line[3] - '0';
+    printf("Num_of_files = %d\n", Num_of_files);
 
     while(1){
     	printf("\nChoose an option\n");
@@ -37,7 +40,6 @@ int main(void)
     	printf("2. Delete a file\n");
     	printf("3. Show freespace in the disk\n");
 
-    	//sleep(1);
     	printf("Input: ");
     	c = getchar();
 
@@ -45,7 +47,43 @@ int main(void)
     		printf("Please enter the name of the file: ");
     		scanf("%s", name);
     		printf("\nThe file name entered  by you is %s\n", name);
+            int n = 0;
+    		
+            while(line[4][n]!=' '){
+    			temp[n]=line[4][n];
+    			n++;
+    		}
+    		
+            temp[n]='\0'; 
+            n=0; 		
+
+    		for(int k=4; k < (4+Num_of_files); k++){
+    			for (int m = 0; temp[m]!='\0'; m++){
+                    if(line[k][m] == temp[m]){
+                        length++;
+                    }
+                    else{
+                        check = 1;
+                    }
+    			}
+                if(check == 0){
+                    add = line[k][length+2];
+                    break;
+                }
+                else{
+                    while(line[k+1][n]!=' '){
+                        temp[n]=line[k+1][n];
+                        n++;
+                    }
+                    temp[n]='\0'; 
+                    n=0; 
+                }
+    		}
+            printf("Starting address = %d\n", add);
     	}
+
+
+
     	else if(c == '2'){
     		printf("Please enter the name of the file you want to delete: ");
     		scanf("%s", name);
