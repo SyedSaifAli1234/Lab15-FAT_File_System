@@ -67,7 +67,9 @@ int main(void) {
                     }
     			}
                 if(check == 0){
-                    add = line[k][length+2];
+                    printf("Length = %d\n", length);
+                    add = (line[k][length+2]) - '0';
+                    printf("Temp = %s\n", temp);
                     break;
                 }
                 else{
@@ -76,6 +78,7 @@ int main(void) {
                         n++;
                     }
                     temp[n]='\0'; 
+                    printf("New temp = %s\n", temp);
                     n=0; 
                 }
     		}
