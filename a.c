@@ -11,6 +11,7 @@ int main(void) {
     char line[row][col];
 	char fname[20];
 	char name[20];
+    char name2[20];
 	char temp[20];
     char c;
     char add;
@@ -79,6 +80,10 @@ int main(void) {
                     //printf("\nMatched at Line %d\n", k);
                     //printf("Length = %d\n", length);
                     add = (line[k][length+1]);///////////////////////////////////////
+                    if(add == NULL){
+                        printf("The file does not exist\n");
+                        break;
+                    }
                     //printf("Starting address = %c\n", add);
 
                     block_add = line[first_block + (add-'0')][0];
@@ -118,19 +123,19 @@ int main(void) {
 
     	else if(c == '2'){
     		printf("Please enter the name of the file you want to delete: ");
-            scanf("%s", name);
+            scanf("%s", name2);
             int n = 0;
             
-            while(name[n]!=NULL){
+            while(name2[n]!=NULL){
                 n++;
             }
             
-            name[n]='\0'; 
+            name2[n]='\0'; 
             n=0;
 
             for(int k=4; k < (4+Num_of_files); k++){
-                for (int m = 0; name[m]!='\0'; m++){
-                    if(line[k][m] == name[m]){
+                for (int m = 0; name2[m]!='\0'; m++){
+                    if(line[k][m] == name2[m]){
                         length++;
                     }
                     else{
@@ -144,11 +149,13 @@ int main(void) {
                     
 
                     block_add = line[first_block + (add-'0')][0];
-                    line[first_block + (add-'0')][0] = '-';
+                    /////////////////////////////////////////
                     
                     while(1){
                         if(block_add == '-'){
                             if(line[first_block + (add-'0')][1] == '1'){
+                                line[first_block + (add-'0')][0] = '-';
+                                line[first_block + (add-'0')][1] = NULL;
                                 break;
                             }
                             else{
@@ -156,12 +163,13 @@ int main(void) {
                             }
                         }
                         else{
-                            blocks++;
+                            line[first_block + (add-'0')][0] = '-';
+                            //blocks++;
                             block_add = line[first_block + (block_add-'0')][0];
                         }
                     }
                     
-                    printf("\n\n\n=====The total space allocated for %s is %d bytes=====\n\n\n", name, (blocks*32));
+                    printf("\n\n\n=====The total space allocated for %s is cleared=====\n\n\n", name2);
                     blocks = 0;
                     break;
 
@@ -170,6 +178,9 @@ int main(void) {
                     check = 0;
                     length = 0;
                 }
+            }
+            for(int i=0; i<18; i++){
+                printf("%s\n", line[i]);
             }
     	}
 
