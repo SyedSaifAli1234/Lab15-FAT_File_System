@@ -12,15 +12,19 @@ int main(void) {
 	char fname[20];
 	char name[20];
 	char temp[20];
+    char c;
+    char add;
+    char block_add;
     FILE *fptr = NULL; 
     int i = 0;
     int tot = 0;
     int j;
-    char c;
   	int Num_of_files;
     int check = 0;
-    int add = 0;
     int length = 0;
+    int first_block = 8;
+    int blocks;
+
 		
 
     fptr = fopen("file.txt", "r");
@@ -31,6 +35,7 @@ int main(void) {
     }
     tot = i;
 	
+
     Num_of_files = *line[3] - '0';
     printf("Num_of_files = %d\n", Num_of_files);
 
@@ -39,6 +44,7 @@ int main(void) {
     	printf("1. Size of a file\n");
     	printf("2. Delete a file\n");
     	printf("3. Show freespace in the disk\n");
+        printf("4. Exit\n");
 
     	printf("Input: ");
     	c = getchar();
@@ -46,44 +52,66 @@ int main(void) {
     	if(c == '1'){
     		printf("Please enter the name of the file: ");
     		scanf("%s", name);
-    		printf("\nThe file name entered  by you is %s\n", name);
+    		printf("\nThe file name entered by you is %s\n", name);
             int n = 0;
     		
-            while(line[4][n]!=' '){
-    			temp[n]=line[4][n];
+            while(name[n]!=NULL){
     			n++;
     		}
     		
-            temp[n]='\0'; 
+            name[n]='\0'; 
             n=0; 		
+            printf("FileName = %s\n\n", name);
 
     		for(int k=4; k < (4+Num_of_files); k++){
-    			for (int m = 0; temp[m]!='\0'; m++){
-                    if(line[k][m] == temp[m]){
+    			for (int m = 0; name[m]!='\0'; m++){
+                    if(line[k][m] == name[m]){
                         length++;
                     }
                     else{
+                        printf("No match\n");
                         check = 1;
+                        break;
                     }
     			}
                 if(check == 0){
+
+                    printf("\nMatched at Line %d\n", k);
                     printf("Length = %d\n", length);
-                    add = (line[k][length+2]) - '0';
-                    printf("Temp = %s\n", temp);
+                    add = (line[k][length+1]);///////////////////////////////////////
+                    printf("Starting address = %c\n", add);
+
+                    block_add = line[first_block + (add-'0')][0];
+                    
+                    while(1){
+                        if(block_add == '-'){
+                            if(line[first_block + (add-'0')][1] == '1'){
+                                printf("No space allocated\n");
+                                break;
+                            }
+                            else(){
+                                printf("The space allocated is 32 bytes\n");
+                                break;
+                            }
+                        }
+                        else{
+                            blocks++;
+                            block_add = line[first_block + (block_add-'0')][0];
+                            printf("Number at block = %c\n", block_add);
+                        }
+                    }
+                    printf("The total space allocated for %s is %d\n", name, (blocks*32));
+                   
                     break;
+
                 }
                 else{
-                    while(line[k+1][n]!=' '){
-                        temp[n]=line[k+1][n];
-                        n++;
-                    }
-                    temp[n]='\0'; 
-                    printf("New temp = %s\n", temp);
-                    n=0; 
+                    printf("Moving to the next line\n");
+                    check = 0;
+                    length = 0;
                 }
     		}
-            printf("Starting address = %d\n", add);
-    	}
+        }
 
 
 
@@ -92,9 +120,24 @@ int main(void) {
     		scanf("%s", name);
     		printf("\nThe file name entered  by you is %s\n", name);
     	}
+
+
+
+
     	else if(c == '3'){
     		printf("\nThe total free space on disk is: \n");
     	}
+
+
+
+        else if(c == '4'){
+            printf("\nGoodbye!\n");
+            break;
+        }
+
+
+
+
     	else{
     		printf("\nOption is invalid\n");
     	}
