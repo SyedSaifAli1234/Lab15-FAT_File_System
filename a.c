@@ -35,7 +35,6 @@ int main(void) {
         i++;
     }
     tot = i;
-	
 
     Num_of_files = *line[3] - '0';
     printf("Num_of_files = %d\n", Num_of_files);
@@ -130,7 +129,7 @@ int main(void) {
             blocks = 0;
 
             while(counter!=row){
-                if(line[first_block][0] == '-' && line[first_block][1] == NULL){
+                if(line[first_block][0] == '-' && line[first_block][1] != '1'){
                     blocks++;
                     first_block++;
                 }
@@ -139,8 +138,8 @@ int main(void) {
                 }
                 counter++;
             }
-            printf("Blocks = %d\n", blocks);
-            printf("The total free space is %d bytes\n", (blocks*32));
+
+            printf("\n\n=====The total free space is %d bytes=====\n", (blocks*32));
             counter = 0;
             first_block = 8;
     	}
