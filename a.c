@@ -39,7 +39,11 @@ int main(void) {
     tot = i;
 
     Num_of_files = *line[3] - '0';
-    printf("Num_of_files = %d\n", Num_of_files);
+    //printf("Num_of_files = %d\n", Num_of_files);
+
+    // for(int i=0; i<18; i++){                                //Use this to check the array
+    //             printf("%s\n", line[i]);
+    // }
 
     while(1){
     	printf("\nChoose an option\n");
@@ -154,19 +158,19 @@ int main(void) {
                     while(1){
                         if(line[first_block + (block_add-'0')][0] == '-'){
                             if(line[first_block + (block_add-'0')][1] == '1'){
-                                printf("-1 found\n");
+                                //printf("-1 found\n");
                                 //memset(line[first_block + (add-'0')], 0, sizeof(line[first_block + (add-'0')]));
                                 line[first_block + (block_add-'0')][0] = '-';
                                 line[first_block + (block_add-'0')][1] = ' ';
                                 break;
                             }
                             else{ 
-                                printf("- found\n");
+                                //printf("- found\n");
                                 break;
                             }
                         }
-                        else if(){
-                            printf("Number found = %c\n", line[first_block + (block_add-'0')][0]);
+                        else{
+                           //printf("Number found = %c\n", line[first_block + (block_add-'0')][0]);
                             new_block_add = line[first_block + (block_add-'0')][0];
                             line[first_block + (block_add-'0')][0] = '-';
                             block_add = new_block_add;
@@ -183,9 +187,9 @@ int main(void) {
                     length = 0;
                 }
             }
-            // for(int i=0; i<18; i++){
-            //     printf("%s\n", line[i]);
-            // }
+            for(int i=0; i<18; i++){                                //Use this to check the array
+               printf("%s\n", line[i]);
+            }
     	}
 
 
