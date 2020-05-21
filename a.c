@@ -16,6 +16,7 @@ int main(void) {
     char c;
     char add;
     char block_add;
+    char new_block_add;
     FILE *fptr = NULL; 
     int i = 0;
     int tot = 0;
@@ -146,26 +147,29 @@ int main(void) {
                 if(check == 0){
 
                     add = (line[k][length+1]);///////////////////////////////////////
-                    
 
                     block_add = line[first_block + (add-'0')][0];
-                    /////////////////////////////////////////
-                    
+                    line[first_block + (add-'0')][0] = '-';
+
                     while(1){
-                        if(block_add == '-'){
-                            if(line[first_block + (add-'0')][1] == '1'){
-                                line[first_block + (add-'0')][0] = '-';
-                                line[first_block + (add-'0')][1] = NULL;
+                        if(line[first_block + (block_add-'0')][0] == '-'){
+                            if(line[first_block + (block_add-'0')][1] == '1'){
+                                printf("-1 found\n");
+                                //memset(line[first_block + (add-'0')], 0, sizeof(line[first_block + (add-'0')]));
+                                line[first_block + (block_add-'0')][0] = '-';
+                                line[first_block + (block_add-'0')][1] = ' ';
                                 break;
                             }
-                            else{
+                            else{ 
+                                printf("- found\n");
                                 break;
                             }
                         }
-                        else{
-                            line[first_block + (add-'0')][0] = '-';
-                            //blocks++;
-                            block_add = line[first_block + (block_add-'0')][0];
+                        else if(){
+                            printf("Number found = %c\n", line[first_block + (block_add-'0')][0]);
+                            new_block_add = line[first_block + (block_add-'0')][0];
+                            line[first_block + (block_add-'0')][0] = '-';
+                            block_add = new_block_add;
                         }
                     }
                     
@@ -179,9 +183,9 @@ int main(void) {
                     length = 0;
                 }
             }
-            for(int i=0; i<18; i++){
-                printf("%s\n", line[i]);
-            }
+            // for(int i=0; i<18; i++){
+            //     printf("%s\n", line[i]);
+            // }
     	}
 
 
@@ -219,7 +223,7 @@ int main(void) {
     	else{
     		printf("\nOption is invalid\n");
     	}
-    	c = getchar();
+    	c=getchar();
 
     }
 
